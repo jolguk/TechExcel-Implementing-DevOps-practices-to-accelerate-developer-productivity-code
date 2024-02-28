@@ -13,10 +13,12 @@ jobs:
     steps:
       - name: Echo Step 1 Complete
         run: echo "Step 1 Complete!"
-    job2:
+  job2:
     runs-on: ubuntu-latest
 
     steps:
      - name: Cowsays Action
-    uses: azure/actions/cowsay@v1 with:
+       uses: azure/actions/cowsay@v1 
+       with:
                         text: "Ready for prod-ship it!"
+                        color: "magenta"
