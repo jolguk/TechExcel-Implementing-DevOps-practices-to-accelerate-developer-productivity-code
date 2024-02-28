@@ -1,12 +1,9 @@
 
 name: First Workflow
 
-on:
-  push:
-    branches:
-      - main
-      issues:
-        types: [opened]
+on: 
+    issues:
+      types: [opened]
 
 jobs:
   job1:
