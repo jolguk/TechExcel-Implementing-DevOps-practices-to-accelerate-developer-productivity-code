@@ -1,4 +1,4 @@
-@description('Location of services')
+# ARM template to deploy a web app with a container image from Azure Container Registry
 param location string = resourceGroup().location
 
 param webAppName string = 'jowebappgithubactions'
@@ -98,6 +98,6 @@ resource appService 'Microsoft.Web/sites@2020-06-01' = {
   }
 }
 
-output application_name string = webAppName.name
+output application_name string = webAppName
 output application_url string = webSiteName
 output container_registry_name string = containerRegistry.name
