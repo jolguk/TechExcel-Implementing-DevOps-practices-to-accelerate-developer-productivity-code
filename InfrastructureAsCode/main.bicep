@@ -4,7 +4,7 @@ param environment string = 'dev'
 @description('Location of services')
 param location string = resourceGroup().location
 
-var webAppName = 'jowebappgithubactions'
+param webAppName string = uniqueString(resourceGroup().id) // Generate unique String for web app name'jowebappgithubactions'
 var appServicePlanName = '${uniqueString(resourceGroup().id)}-mpnp-asp'
 var logAnalyticsName = '${uniqueString(resourceGroup().id)}-mpnp-la'
 var appInsightsName = '${uniqueString(resourceGroup().id)}-mpnp-ai'
@@ -13,6 +13,7 @@ var registryName = '${uniqueString(resourceGroup().id)}mpnpreg'
 var registrySku = 'Standard'
 var imageName = 'techboost/dotnetcoreapp'
 var startupCommand = ''
+var webSiteName = toLower('wapp-${webAppName}')
 
 
 resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2021-12-01-preview' = {
@@ -63,7 +64,7 @@ resource appServicePlan 'Microsoft.Web/serverFarms@2020-12-01' = {
 }
 
 resource appServiceApp 'Microsoft.Web/sites@2020-12-01' = {
-  name: webAppName
+  name: webSiteName
   location: location
   properties: {
     serverFarmId: appServicePlan.id
