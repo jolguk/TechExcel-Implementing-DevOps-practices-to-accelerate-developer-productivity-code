@@ -4,7 +4,7 @@ param environment string = 'dev'
 @description('Location of services')
 param location string = resourceGroup().location
 
-var webAppName = '${uniqueString(resourceGroup().id)}-${environment}'
+var webAppName = 'jowebappgithubactions'
 var appServicePlanName = '${uniqueString(resourceGroup().id)}-mpnp-asp'
 var logAnalyticsName = '${uniqueString(resourceGroup().id)}-mpnp-la'
 var appInsightsName = '${uniqueString(resourceGroup().id)}-mpnp-ai'
