@@ -1,9 +1,6 @@
 name: Deploy Bicep Template to Azure
 
-on:
-  push:
-    branches:
-      - main
+on: [workflow_dispatch]
 
 jobs:
   deploy:
@@ -16,7 +13,8 @@ jobs:
       - name: Set up Azure CLI
         uses: azure/login@v1
         with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
+          creds: ${{ secrets.AZURE_CRREDENTIALS }}
+    
 
       - name: Install Bicep CLI
         run: |
@@ -26,9 +24,11 @@ jobs:
 
      
 
-      - name: Deploy ARM template
+  # Deploy ARM template
+      - name: Run ARM deploy
         uses: azure/arm-deploy@v1
         with:
-            subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-            resourceGroupName: ${{ secrets.AZURE_RG }}
-            template: ../../InfastructureAsCode/main.bicep
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          resourceGroupName: ${{ secrets.AZURE_RG }}
+          template: ./InfrastructureAsCode/main.bicep
+          parameters: environment=${{ env.targetEnv }}
