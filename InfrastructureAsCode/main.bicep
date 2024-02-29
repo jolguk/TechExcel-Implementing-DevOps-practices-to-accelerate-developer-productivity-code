@@ -1,4 +1,3 @@
-@description('Location of services')
 param location string = resourceGroup().location
 
 param webAppName string = 'jowebappgithubactions'
