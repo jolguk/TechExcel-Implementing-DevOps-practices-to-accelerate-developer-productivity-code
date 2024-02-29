@@ -33,5 +33,5 @@ jobs:
         with:
             subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
             resourceGroupName: ${{ secrets.AZURE_RG }}
-            template: ../../InfastructureAsCode/main.bicep
+            template: ./InfastructureAsCode/main.bicep
             parameters: environment=${{ env.targetEnv }}
