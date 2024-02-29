@@ -1,5 +1,5 @@
 @description('Environment of the web app')
-param environment string = 'dev'
+
 
 @description('Location of services')
 param location string = resourceGroup().location
@@ -101,6 +101,6 @@ resource appService 'Microsoft.Web/sites@2020-06-01' = {
   }
 }
 
-output application_name string = appServiceApp.name
-output application_url string = appServiceApp.properties.hostNames[0]
+output application_name string = webAppName.name
+output application_url string = webSiteName.properties.hostNames[0]
 output container_registry_name string = containerRegistry.name
