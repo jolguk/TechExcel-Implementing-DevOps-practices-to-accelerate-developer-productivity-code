@@ -2,7 +2,7 @@ name: Deploy Bicep Template
 
 on: [workflow_dispatch]
 permissions:
-  id-token: wirte
+  id-token: write
   contents: read
   pages: write
 
