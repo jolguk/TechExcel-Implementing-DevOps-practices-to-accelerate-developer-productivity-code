@@ -51,25 +51,23 @@ resource containerRegistry 'Microsoft.ContainerRegistry/registries@2020-11-01-pr
   }
 }
 
-resource appServicePlan 'Microsoft.Web/serverFarms@2020-12-01' = {
+resource appServicePlan 'Microsoft.Web/serverfarms@2020-06-01' = {
   name: appServicePlanName
   location: location
-  kind: 'linux'
   properties: {
     reserved: true
   }
   sku: {
     name: sku
   }
+  kind: 'linux'
 }
 
-resource appServiceApp 'Microsoft.Web/sites@2020-12-01' = {
+resource appService 'Microsoft.Web/sites@2020-06-01' = {
   name: webSiteName
   location: location
   properties: {
     serverFarmId: appServicePlan.id
-    httpsOnly: true
-    clientAffinityEnabled: false
     siteConfig: {
       linuxFxVersion: 'DOCKER|${containerRegistry.name}.azurecr.io/${uniqueString(resourceGroup().id)}/${imageName}'
       http20Enabled: true
@@ -98,7 +96,9 @@ resource appServiceApp 'Microsoft.Web/sites@2020-12-01' = {
         }
         ]
       }
-    }
+
+
+  }
 }
 
 output application_name string = appServiceApp.name
