@@ -1,9 +1,10 @@
 name: Deploy Bicep Template
 
-on:
-  push:
-    branches:
-      - main
+on: [workflow_dispatch]
+permissions:
+  id-token: wirte
+  contents: read
+  pages: write
 
 jobs:
   deploy:
@@ -17,6 +18,7 @@ jobs:
         uses: azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
+          enable-AzPsSession: true
 
       - name: Install Bicep CLI
         run: |
@@ -32,3 +34,4 @@ jobs:
             subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
             resourceGroupName: ${{ secrets.AZURE_RG }}
             template: ../../InfastructureAsCode/main.bicep
+            parameters: environment=${{ env.targetEnv }}
